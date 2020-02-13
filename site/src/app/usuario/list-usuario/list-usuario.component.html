@@ -1,0 +1,38 @@
+<div class="container-md">
+    <div class="d-flex justify-content-between py-3">
+        <div class="search col-md-9">
+            <input type="text" class="form-control">
+        </div>
+        <div class="col-md-3">
+            <create-usuario [idUsuario]=null [TypeButton]="'1'" [nameButton]="'Crear'" (modifyUsuario)="validatorUsuario()"></create-usuario>
+        </div>
+    </div>
+    <div class="title text-center">
+        <h2>Lista de Usuarios</h2>
+    </div>
+    <div class="container-fluid">
+        <ngx-datatable class="material" [rows]="listUsuario" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [sorts]="[{prop: 'name', dir: 'desc'}]">
+            <ngx-datatable-column name="Nombre">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.nombre }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Email">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.email}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Contacto">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.contacto}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Acciones">
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <create-usuario [idUsuario]="row.id" [TypeButton]="'2'" (modifyUsuario)="validatorUsuario()"></create-usuario>
+                    <button class="btn btn-outline-danger mr-2" (click)="deleteUsuario(row.id)"><i class="fas fa-trash-alt"></i></button>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

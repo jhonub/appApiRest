@@ -1,0 +1,27 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { UsuarioComponent } from './usuario.component';
+import { CreateUsuarioComponent } from './create-usuario/create-usuario.component';
+import { ListUsuarioComponent } from './list-usuario/list-usuario.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+ import { ToastrModule } from 'ngx-toastr';
+
+
+@NgModule({
+  declarations: [UsuarioComponent, CreateUsuarioComponent, ListUsuarioComponent],
+  imports: [
+    CommonModule,
+    NgxDatatableModule,
+    NgbModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
+  ],
+  exports:[
+    UsuarioComponent, CreateUsuarioComponent, ListUsuarioComponent
+  ]
+})
+export class UsuarioModule { }
