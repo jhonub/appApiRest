@@ -33,11 +33,8 @@ export class ListUsuarioComponent implements OnInit {
 
   ListUsuariosQuery(){
     this.webservice.getListUsuarios().subscribe(
-     data=>{
-        console.log(data);
-        
-        //this.listUsuario=response;
-        
+     response=>{
+        this.listUsuario=response.data;
       }
     )
   }
@@ -50,7 +47,6 @@ export class ListUsuarioComponent implements OnInit {
       },
       error=>{
         console.log(error);
-        
       }
     )
   }

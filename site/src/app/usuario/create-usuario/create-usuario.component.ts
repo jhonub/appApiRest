@@ -51,11 +51,10 @@ export class CreateUsuarioComponent implements OnInit {
   inicializatorEditUsuario(){
     this.webservice.getByIdUsuario(this.idUsuario).subscribe(
       response=>{
-        this.validatorEditUsuario(response);
+        this.validatorEditUsuario(response.data);
       },
       error=>{
         console.log(error);
-        
       }
     )
   }
