@@ -24,14 +24,14 @@ export class ListUsuarioComponent implements OnInit {
   }  
 
   inicializator(){
-  this.ListUsuariosQuery();
+  this.listUsuariosQuery();
   }
 
   showError() {
     this.toastr.success('Usuario Eliminado!!');
   }
 
-  ListUsuariosQuery(){
+  listUsuariosQuery(){
     this.webservice.getListUsuarios().subscribe(
      response=>{
         this.listUsuario=response.data;
@@ -40,9 +40,11 @@ export class ListUsuarioComponent implements OnInit {
   }
 
   deleteUsuario(id){
+    console.log(id);
     this.webservice.deleteUsuario(id).subscribe(
       response =>{
-        this.ListUsuariosQuery();
+        console.log(response);
+        this.listUsuariosQuery();
         this.showError();
       },
       error=>{

@@ -83,6 +83,6 @@ class UsuarioController extends Controller
             'data'=>$Data,
             'errors'=>''
         );
-        return response($usuario)->json($Data);
+        return response()->json($Data);
     }
 }

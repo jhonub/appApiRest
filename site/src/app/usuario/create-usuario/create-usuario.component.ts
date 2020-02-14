@@ -43,9 +43,9 @@ export class CreateUsuarioComponent implements OnInit {
   inicializatorFormValidator(){
     this.formUsuario = this.formBuilder.group({
       nombre:['',Validators.required],
-      email:['',Validators.required],
-      contacto:['',Validators.required],
-    })
+      email:['',[Validators.required, Validators.email]],
+      contacto:['',[Validators.required, Validators.minLength(9)]]
+    });
   }
 
   inicializatorEditUsuario(){
