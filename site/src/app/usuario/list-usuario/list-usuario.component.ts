@@ -11,24 +11,22 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ListUsuarioComponent implements OnInit {
 
-  public listUsuario:Array<any>=[];
+  public listUsuario:Array<any>;
   public data:any;
 
   constructor(
     private webservice:WebService,
     private modalService: NgbModal,
-    private toastr: ToastrService
+    private toastrService: ToastrService
   ) { }
+  filterusuario = '';
   ngOnInit() {
     this.inicializator();
   }  
 
   inicializator(){
+    this.listUsuario=[];
   this.listUsuariosQuery();
-  }
-
-  showError() {
-    this.toastr.success('Usuario Eliminado!!');
   }
 
   listUsuariosQuery(){
@@ -43,9 +41,8 @@ export class ListUsuarioComponent implements OnInit {
     console.log(id);
     this.webservice.deleteUsuario(id).subscribe(
       response =>{
-        console.log(response);
         this.listUsuariosQuery();
-        this.showError();
+        this.messageToast('USUARIO', 'Usuario eliminado', 'success');
       },
       error=>{
         console.log(error);
@@ -55,5 +52,25 @@ export class ListUsuarioComponent implements OnInit {
 
   validatorUsuario(){
     this.inicializator();
+  }
+
+  messageToast(title, sms, type) {
+    let config = {};
+
+    if(type == 'success') {
+      this.toastrService.success(sms, title, config);
+    }
+
+    if(type == 'info') {
+      this.toastrService.info(sms, title, config);
+    }
+
+    if(type == 'warning') {
+      this.toastrService.warning(sms, title, config);
+    }
+
+    if(type == 'danger') {
+      this.toastrService.error(sms, title, config);
+    }
   }
 }

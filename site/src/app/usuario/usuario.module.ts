@@ -7,17 +7,21 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
- import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
-  declarations: [UsuarioComponent, CreateUsuarioComponent, ListUsuarioComponent],
+  declarations: [UsuarioComponent, CreateUsuarioComponent, ListUsuarioComponent, FilterPipe],
   imports: [
     CommonModule,
     NgxDatatableModule,
     NgbModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FormsModule,
     ToastrModule.forRoot()
   ],
   exports:[

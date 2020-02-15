@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsuarioModule } from './usuario/usuario.module';
 import { WebService } from './service/webservice.service';
 
+
 @NgModule({
   declarations: [
     AppComponent

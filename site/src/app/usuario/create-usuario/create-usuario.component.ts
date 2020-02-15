@@ -16,7 +16,7 @@ export class CreateUsuarioComponent implements OnInit {
   @Input() nameButton;
   @Output() modifyUsuario = new EventEmitter();
 
-  public listUsuario:Array<any>=[];
+  public listUsuario:Array<any>;
   public modalReference:NgbModalRef;
   public formValidatorStatus:boolean;
   public formUsuario:FormGroup;
@@ -27,12 +27,14 @@ export class CreateUsuarioComponent implements OnInit {
     private webservice:WebService,
     private modalService: NgbModal,
     private formBuilder:FormBuilder,
-    private toastr: ToastrService
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
   }
+
   inicializator(){
+    this.listUsuario=[];
     this.formValidatorStatus=false;
     this.inicializatorFormValidator();
     if(this.idUsuario != null){
@@ -58,14 +60,6 @@ export class CreateUsuarioComponent implements OnInit {
       }
     )
   }
-  
-  showSuccess() {
-    this.toastr.success('Nuevo Usuario Ingresado!!');
-  }
-
-  showUpdate(){
-    this.toastr.success('Datos Actualizados!!');
-  }
 
   saveSubmitUsuario(){
     this.formValidatorStatus=true;
@@ -84,7 +78,7 @@ export class CreateUsuarioComponent implements OnInit {
     this.webservice.postUsuario(this.formUsuario.value).subscribe(
       response=>{
         this.modifyUsuario.emit(this.formUsuario.value);
-        this.showSuccess();
+        this.messageToast('USUARIO', 'Documento registrado con éxito', 'success');
         this.modalReference.close();
       },
       error=>{
@@ -97,7 +91,7 @@ export class CreateUsuarioComponent implements OnInit {
     this.webservice.putUsuario(this.formUsuario.value, this.idUsuario).subscribe(
       response=>{
         this.modifyUsuario.emit(this.formUsuario.value);
-        this.showUpdate();
+        this.messageToast('USUARIO', 'Usuario actualizado con éxito', 'success');
         this.modalReference.close();
       },
       error=>{
@@ -115,6 +109,26 @@ export class CreateUsuarioComponent implements OnInit {
   mdCallModalService(mdUsuario) {
     this.inicializator();
     this.modalReference = this.modalService.open(mdUsuario, { size: 'lg', backdrop:'static' });
+  }
+
+  messageToast(title, sms, type) {
+    let config = {};
+
+    if(type == 'success') {
+      this.toastrService.success(sms, title, config);
+    }
+
+    if(type == 'info') {
+      this.toastrService.info(sms, title, config);
+    }
+
+    if(type == 'warning') {
+      this.toastrService.warning(sms, title, config);
+    }
+
+    if(type == 'danger') {
+      this.toastrService.error(sms, title, config);
+    }
   }
 
 }

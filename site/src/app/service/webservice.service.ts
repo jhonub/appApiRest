@@ -25,3 +25,4 @@ export class WebService {
     return this.http.delete(this.API_Server + 'usuarios/' + id);
   }
 }
+
