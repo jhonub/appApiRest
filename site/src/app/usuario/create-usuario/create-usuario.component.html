@@ -8,14 +8,28 @@
     <div class="modal-body">
         <form [formGroup]="formUsuario">
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label>Nombre:</label>
                     <input type="text" formControlName="nombre" class="form-control" [ngClass]="{ 'is-invalid': formValidatorStatus && formValidator.nombre.errors }">
                     <div *ngIf="formValidatorStatus && formValidator.nombre.errors" class="invalid-feedback">
                         <div *ngIf="formValidator.nombre.errors.required">* obligatorio</div>
                     </div>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label>Apellido Paterno:</label>
+                    <input type="text" formControlName="apellidoPaterno" class="form-control" [ngClass]="{ 'is-invalid': formValidatorStatus && formValidator.apellidoPaterno.errors }">
+                    <div *ngIf="formValidatorStatus && formValidator.apellidoPaterno.errors" class="invalid-feedback">
+                        <div *ngIf="formValidator.apellidoPaterno.errors.required">* obligatorio</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Apellido Materno:</label>
+                    <input type="text" formControlName="apellidoMaterno" class="form-control" [ngClass]="{ 'is-invalid': formValidatorStatus && formValidator.apellidoMaterno.errors }">
+                    <div *ngIf="formValidatorStatus && formValidator.apellidoMaterno.errors" class="invalid-feedback">
+                        <div *ngIf="formValidator.apellidoMaterno.errors.required">* obligatorio</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
                     <label>Email:</label>
                     <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': formValidatorStatus && formValidator.email.errors }">
                     <div *ngIf="formValidatorStatus && formValidator.email.errors" class="invalid-feedback">
@@ -29,6 +43,14 @@
                     <div *ngIf="formValidatorStatus && formValidator.contacto.errors" class="invalid-feedback">
                         <div *ngIf="formValidator.contacto.errors.required">* obligatorio</div>
                         <div *ngIf="formValidator.contacto.errors.minLength">Ingrese numnero</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>DNI:</label>
+                    <input type="text" formControlName="dni" class="form-control" [ngClass]="{ 'is-invalid': formValidatorStatus && formValidator.dni.errors }">
+                    <div *ngIf="formValidatorStatus && formValidator.dni.errors" class="invalid-feedback">
+                        <div *ngIf="formValidator.dni.errors.required">* obligatorio</div>
+                        <div *ngIf="formValidator.dni.errors.minLength">Ingrese numnero</div>
                     </div>
                 </div>
             </div>

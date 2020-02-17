@@ -16,60 +16,64 @@ export class CreateUsuarioComponent implements OnInit {
   @Input() nameButton;
   @Output() modifyUsuario = new EventEmitter();
 
-  public listUsuario:Array<any>;
-  public modalReference:NgbModalRef;
-  public formValidatorStatus:boolean;
-  public formUsuario:FormGroup;
+  public listUsuario: Array<any>;
+  public modalReference: NgbModalRef;
+  public formValidatorStatus: boolean;
+  public formUsuario: FormGroup;
 
-  get formValidator(){return this.formUsuario.controls}
+  get formValidator() { return this.formUsuario.controls }
 
   constructor(
-    private webservice:WebService,
+    private webservice: WebService,
     private modalService: NgbModal,
-    private formBuilder:FormBuilder,
+    private formBuilder: FormBuilder,
     private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
   }
 
-  inicializator(){
-    this.listUsuario=[];
-    this.formValidatorStatus=false;
+  inicializator() {
+    this.listUsuario = [];
+    this.formValidatorStatus = false;
     this.inicializatorFormValidator();
-    if(this.idUsuario != null){
+    if (this.idUsuario != null){
       this.inicializatorEditUsuario();
     }
   }
 
-  inicializatorFormValidator(){
+  inicializatorFormValidator() {
     this.formUsuario = this.formBuilder.group({
-      nombre:['',Validators.required],
-      email:['',[Validators.required, Validators.email]],
-      contacto:['',[Validators.required, Validators.minLength(9)]]
+      nombre: ['', Validators.required],
+      apellidoPaterno: ['', Validators.required],
+      apellidoMaterno: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contacto: ['', [Validators.required, Validators.minLength(9)]],
+      dni: ['', [Validators.required, Validators.minLength(8)]],
+
     });
   }
 
   inicializatorEditUsuario(){
     this.webservice.getByIdUsuario(this.idUsuario).subscribe(
-      response=>{
+      response => {
         this.validatorEditUsuario(response.data);
       },
-      error=>{
+      error => {
         console.log(error);
       }
     )
   }
 
   saveSubmitUsuario(){
-    this.formValidatorStatus=true;
-    if(this.formUsuario.invalid){
+    this.formValidatorStatus = true;
+    if (this.formUsuario.invalid) {
       return;
     }
-    if(this.idUsuario != null){
+    if (this.idUsuario != null) {
       this.updateUsuario();
     }
-    else{
+    else {
       this.saveUsuario();
     }
   }
@@ -102,8 +106,12 @@ export class CreateUsuarioComponent implements OnInit {
 
   validatorEditUsuario(usuario){
     this.formUsuario.get('nombre').setValue(usuario.nombre);
+    this.formUsuario.get('apellidoPaterno').setValue(usuario.apellidoPaterno); 
+    this.formUsuario.get('apellidoMaterno').setValue(usuario.apellidoMaterno); 
     this.formUsuario.get('email').setValue(usuario.email);
-    this.formUsuario.get('contacto').setValue(usuario.contacto);
+    this.formUsuario.get('contacto').setValue(usuario.contacto); 
+    this.formUsuario.get('dni').setValue(usuario.dni); 
+    
   }
 
   mdCallModalService(mdUsuario) {
