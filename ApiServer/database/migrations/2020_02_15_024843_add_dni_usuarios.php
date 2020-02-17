@@ -16,7 +16,7 @@ class AddDniUsuarios extends Migration
         Schema::table('usuarios', function(Blueprint $table){
             $table -> string('apellidoPaterno')->nullable()->after('nombre');
             $table -> string('apellidoMaterno')->nullable()->after('apellidoPaterno');
-            $table -> integer('dni')->unique()->nullable()->after('contacto');
+            $table -> string('dni')->nullable()->after('contacto');
         });
     }
 
@@ -28,8 +28,6 @@ class AddDniUsuarios extends Migration
     public function down()
     {
         Schema::table('usuarios', function(Blueprint $table){
-            $table -> dropColumn('apellidoPaterno');
-            $table -> dropColumn('apellidoMaterno');
             $table -> dropColumn('dni');
         });
     }
