@@ -28,6 +28,8 @@ class AddDniUsuarios extends Migration
     public function down()
     {
         Schema::table('usuarios', function(Blueprint $table){
+            $table -> dropColumn('apellidoPaterno');
+            $table -> dropColumn('apellidoMaterno');
             $table -> dropColumn('dni');
         });
     }

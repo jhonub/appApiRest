@@ -29,11 +29,32 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $data= array(
-            'data'=>usuario::create($request->all()),
-            'errors'=>''
-        );
-        return response()->json($data);
+        $rules=[
+            'nombre' => 'required',
+            'apellidoPaterno' => 'required',
+            'apellidoMaterno' => 'required',
+            'email' => 'required|email|unique:usuarios',
+            'contacto' => 'required',
+            'dni' => 'required|unique:usuarios,dni'
+        ];
+
+        $validator = \Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return \Response::json([
+                'data' => null,
+                'errors'  => $validator->errors()->all()
+            ], 400);
+        }
+        $response = usuario::create($request->all());
+        return \Response::json([
+            'data' => $response,
+            'errors'  => null
+        ], 201);
+        // $data= array(
+        //     'data'=>usuario::create($request->all()),
+        //     'errors'=>''
+        // );
+        // return response()->json($data);
     }
 
     /**
